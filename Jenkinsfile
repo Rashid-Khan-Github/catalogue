@@ -14,7 +14,6 @@ pipeline{
 
             steps{
                 sh 'pwd'
-                sh 'cd catalogue'
                 sh 'ls -ltr'
                 sh 'npm install'
             }
