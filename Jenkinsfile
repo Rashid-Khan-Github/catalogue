@@ -19,6 +19,17 @@ pipeline{
             }
         }
 
+        stage('Build') {
+
+            steps{
+                sh '''
+                    pwd
+                    ls -ltr
+                    zip -r ./*
+                '''
+            }
+        }
+
         stage('Run Unit Tests') {
             steps{
                 echo 'Running Unit Tests'
@@ -45,7 +56,7 @@ pipeline{
     post{
         always{
             echo 'Cleaning Up Workspace'
-            deleteDir()
+            //deleteDir()
         }
     }
 
