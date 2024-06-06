@@ -7,8 +7,23 @@ pipeline{
     }
 
     // agent any
+
+    environment{
+        packageVersion = ''
+    }
     
     stages{
+
+        stage('Install Dependencies') {
+
+            steps{
+                script{
+                    def packageJson = readJSON(file: 'package.json')
+                    packageVersion = packageJson.version
+                    echo "version: ${packageVersion}"
+                }
+            }
+        }
 
         stage('Install Dependencies') {
 
@@ -58,7 +73,7 @@ pipeline{
                     protocol: 'http',
                     nexusUrl: '34.229.101.93:8081/',
                     groupId: 'com.roboshop',
-                    version: '1.0.0',
+                    version: "${packageVersion}",
                     repository: 'catalogue',
                     credentialsId: 'nexus-auth',
                     artifacts: [
