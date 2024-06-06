@@ -37,7 +37,7 @@ pipeline{
                 sh '''
                     pwd
                     ls -ltr
-                    zip -r catalogue./* --exclude .git --exclude .zip
+                    zip -r catalogue.zip ./* --exclude .git --exclude .zip
                 '''
             }
         }
