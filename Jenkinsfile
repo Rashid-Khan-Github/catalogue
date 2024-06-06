@@ -17,6 +17,7 @@ pipeline{
         stage('Get Version') {
 
             steps{
+
                 script{
                     def packageJson = readJSON(file: 'package.json')
                     packageVersion = packageJson.version
@@ -65,6 +66,7 @@ pipeline{
             }
         }
 
+        //Install Pipeline Utility steps plugin and Nexus Artifact Uploader
         stage('Publish Artifacts') {
 
             steps{
@@ -73,7 +75,7 @@ pipeline{
                     protocol: 'http',
                     nexusUrl: '34.229.101.93:8081/',
                     groupId: 'com.roboshop',
-                    version: "${packageVersion}",
+                    version: "$packageVersion",
                     repository: 'catalogue',
                     credentialsId: 'nexus-auth',
                     artifacts: [
@@ -85,10 +87,18 @@ pipeline{
                 )
             }
         }
-
+        // here i need to configure downstream job. I have to pass package version for deployment
+        // This job will wait until downstream job is over
         stage('Deployment') {
             steps{
-                echo 'Deploying to Server'
+                script{
+                     echo 'Deploying to Server'
+                     def params = [
+                        string(name: 'version', value: "${packageVersion}")
+                     ]
+                    build job: "../catalogue-deploy", wait: true, parameters: params
+                }
+               
             }
         }
     }
