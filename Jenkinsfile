@@ -44,7 +44,7 @@ pipeline{
 
         // Static Application Security Testing
 
-         stage('SAST') {
+        stage('SAST') {
             steps{
                 echo "Static Application Security Testing Done"
             }
@@ -81,7 +81,7 @@ pipeline{
     post{
         always{
             echo 'Cleaning Up Workspace'
-            //deleteDir()
+            deleteDir()
         }
     }
 
