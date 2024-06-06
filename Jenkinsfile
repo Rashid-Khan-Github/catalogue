@@ -14,7 +14,7 @@ pipeline{
     
     stages{
 
-        stage('Install Dependencies') {
+        stage('Get Version') {
 
             steps{
                 script{
