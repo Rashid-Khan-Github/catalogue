@@ -60,9 +60,9 @@ pipeline{
                     groupId: 'com.roboshop',
                     version: '1.0.0',
                     repository: 'catalogue',
-                    credentialsId: 'CredentialsId',
+                    credentialsId: 'nexus-auth',
                     artifacts: [
-                        [artifactId: 'nexus-auth',
+                        [artifactId: 'catalogue',
                         classifier: '',
                         file: 'catalogue.zip',
                         type: 'zip']
