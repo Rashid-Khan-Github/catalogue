@@ -63,6 +63,7 @@ pipeline{
         stage('SAST') {
             steps{
                 echo "Static Application Security Testing Done"
+                echo "version: ${packageVersion}"
             }
         }
 
@@ -73,7 +74,7 @@ pipeline{
                 nexusArtifactUploader(
                     nexusVersion: 'nexus3',
                     protocol: 'http',
-                    nexusUrl: '172.31.37.24/:8081/',
+                    nexusUrl: '172.31.37.24:8081/',
                     groupId: 'com.roboshop',
                     version: "${packageVersion}",
                     repository: 'catalogue',
