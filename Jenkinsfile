@@ -5,7 +5,7 @@
 // nodeJs_CI
 
 def configMap = [
-    application: "nodejsVM"
+    application: "nodejsVM",
     component: "catalogue"
 ]
 
